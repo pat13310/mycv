@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ name }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="spacer-5"></div>
+    <h1 class="my-3 text-center">{{ name }}</h1>
+    <hr>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    {% for year in years %}
+                        <div onclick="onPush('{{ loop.index }}')" class="btn-year">{{ year }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <form name="form_valid" id="form_year" method="post" action="{{ path('cv.model') }}">
+                <input type="hidden" name="year">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        let form = document.getElementById("form_year");
+
+        function onPush(index) {
+            form.year.value = index;
+            form.submit();
+
+        }
+    </script>
+{% endblock %}

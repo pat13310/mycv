@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <p class="navbar-brand docs-creator" href="#">
+            <div class="logo">Mon&nbsp;<span class="logo2">CV</span></div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto ms-4">
+                <li class="nav-item">
+                    <a class="nav-link docs-creator" href="#">Tarifs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link docs-creator" href="#">A propos de</a>
+                </li>
+                {#  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle docs-creator" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item docs-creator" href="#">Action</a>
+                        <a class="dropdown-item docs-creator" href="#">Another action</a>
+                        <a class="dropdown-item docs-creator" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item docs-creator" href="#">Separated link</a>
+                    </div>
+                </li> #}
+            </ul>
+            <div class="d-flex">
+                <ul class="navbar-nav me-auto ms-4">
+                    <li class="nav-item">
+                        <a class="nav-link docs-creator" href="{{ path('app.cv') }}">CV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link docs-creator" href="{{ path('app.motivation') }}">Lettre de motivation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link docs-creator" href="#">Connexion&nbsp;<i
+                                    class="fa-solid fa-right-to-bracket"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>

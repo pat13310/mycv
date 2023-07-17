@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ name }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="spacer-5"></div>
+    <h1 class="my-4 text-center">{{ name }}</h1>
+    <hr class="mb-5">
+
+    <div class="container">
+        <div class="row d-flex justify-content-evenly ">
+            {% for choice in choices %}
+
+                <div onclick="onPush('{{ loop.index }}')" class="btn-choice">
+                    <div class="{{ choice.icon }} text-center w-100"></div>
+                    <div>
+                        <h4 class="text-center">{{ choice.name }}</h4></div>
+                    <div class="text-center">{{ choice.subname }}</div>
+                </div>
+                {% endfor %}
+
+            <form name="form_choice" id="form_choice" method="post" action="{{ path('cv.dashboard') }}">
+                <input type="hidden" name="choice">
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        let form_valid=document.querySelector('#form_choice');
+       /* let choices_btn=document.querySelectorAll('.btn-choice');
+
+
+        for(let i=0; i<choices_btn.length; i++){
+            choices_btn[i].addEventListener("click",()=>{
+                form.submit();
+            });
+        }
+        */
+        function onPush(index) {
+            form_valid.choice.value = index;
+            form_valid.submit();
+        }
+    </script>
+{% endblock %}

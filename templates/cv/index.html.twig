@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ name }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="spacer-5"></div>
+    <h1 class="my-3 text-center">{{ name }}</h1>
+    <hr>
+    <div class="container-fluid row">
+    <div id="img-container" class="col-4">
+        <img class="image-pic" src="{{ asset('build/images/recrut1.jpg') }}" alt="Image de recrutement">
+    </div>
+    <div id="puce-container" class="col-8 mt-5">
+        {% for point in points %}
+            <div><p class="text-point"><span class="puce">{{ loop.index }}</span>{{ point }}</p></div>
+        {% endfor %}
+        <div class="col-12">
+            <div class="row" id="btn-container">
+                <div class="px-2 ms-5 btn-create "><a href="{{ path('cv.year') }}">Créer votre CV</a></div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ name }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="spacer-5"></div>
+    <h1 class="my-3 text-center">{{ name }}</h1>
+    <hr>
+    <div class="container-fluid mt-4 px-4">
+        <div class="row">
+            <div class="col-6">
+                <div id="img-container">
+                    <img class="image-pic2" src="{{ asset('build/images/cam1.jpg') }}" alt="Image de recrutement">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center flex-column bg-blue col-6">
+                <div class="error collapse">La capture n'a pas les permissions nécessaires</div>
+                <img class="photo_capture" alt-image="Capture de la photo"/>
+                <video id="videoElement" autoplay="true" class="mx-auto"></video>
+                <div class="d-flex w-100 justify-content-evenly mt-3 px-4">
+                    <div>
+                        <button class="btn btn-primary" id="captureButton"><i class="fa-solid fa-camera"></i> Prendre
+                            une photo
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="imageButton"><i class="far fa-image"></i> Charge une image
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-3">
+            <div class="mt-3 col-12 "></div>
+            <div class="col-12 d-flex justify-content-center">
+                <form name="form_valid" id="form_year" method="post" action="{{ path('cv.model') }}">
+                    <input type="hidden" name="year">
+                    <button class="btn btn-create " type="submit" name="valid_camera">Suivant</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+
+        let video = document.getElementById("videoElement");
+        let captureButton = document.getElementById("captureButton");
+        let _error = document.querySelector(".error");
+        let _image = document.querySelector(".photo_capture");
+        let image = null;
+
+        captureButton.addEventListener("click", () => {
+            takePhoto(video);
+        });
+
+        // Accès à la caméra
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    _error.classList.remove("collapse");
+                    // console.error('Erreur lors de l\'accès à la caméra', error);
+                });
+        }
+
+        function takePhoto(video) {
+            let canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            let context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            let image = canvas.toDataURL('image/jpeg');
+            _image.src = image;
+            savePhoto(image);
+        }
+
+        function savePhoto(photoURL) {
+            let link = document.createElement('a');
+            link.href = photoURL;
+            link.download = 'photo.jpg';
+            link.click();
+        }
+
+
+        function upload(image) {
+            // Créer un objet FormData
+            let formData = new FormData();
+            formData.append('image', encodeURIComponent(image));
+            // formData.append('year', 'Valeur de l\'autre donnée');
+            fetch('upload.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
+            })
+                .then(function (response) {
+                    console.log('Image envoyée avec succès.');
+                })
+                .catch(function (error) {
+                    error.innerText = 'Erreur lors de l\'envoi de l\'image : ' + error;
+                });
+        }
+
+        function sendNext() {
+            if (image !== null) {
+                upload(image);
+            }
+        }
+
+        let form = document.getElementById("form_year");
+
+        function onPush(index) {
+            form.year.value = index;
+            form.submit();
+
+        }
+    </script>
+{% endblock %}

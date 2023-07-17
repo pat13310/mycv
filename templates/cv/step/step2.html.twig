@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}{{ name }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="spacer-5"></div>
+    <h1 class="my-4 text-center">{{ name }}</h1>
+    <h4 class="my-3 text-center">{{ subname }}</h4>
+    <div class="mt-2 row mx-6 justify-content-center">
+        <div class="col-4 form-group me-3">
+            <label class="col-form-label mt-4" for="firstname">PRÉNOM</label>
+            <input type="text" class="form-control" placeholder="ex: Jean" id="firstname">
+        </div>
+        <div class="col-4 form-group">
+            <label class="col-form-label mt-4" for="name">NOM</label>
+            <input type="text" class="form-control" placeholder="ex: Dupond" id="name">
+        </div>
+        <div id="color-container" class="my-4 d-flex justify-content-between"> </div>
+    </div>
+    <hr class="mb-4">
+
+    <div id="template-container" class="grid-4">
+        {% for model in models %}
+            <div onclick="onPush('{{ loop.index }}')" class="model">{{ model }}</div>
+        {% endfor %}
+        <form name="form_valid" id="form_year" method="post" action="{{ path('cv.year') }}">
+            <input type="hidden" name="year">
+        </form>
+    </div>
+    <
+
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('/js/colors.js') }}"></script>
+    <script type="text/javascript">
+
+        let form = document.getElementById("form_year");
+        let models = document.querySelectorAll(".model");
+
+        let color_container = document.getElementById("color-container");
+        let template_container = document.getElementById("template-container");
+        let templates=[{'name':'CV1'},{'name':'CV2'},{'name':'CV3'},{'name':'CV4'},{'name':'CV5'},{'name':'CV6'},{'name':'CV7'},{'name':'CV8'}];
+        loadColors(color_container);
+        /* for (let i = 0; i < colors.length; i++) {
+
+            let panel = document.createElement("div");
+            colors[i].appendChild(panel);
+            panel.classList.add("color-select-popup");
+            panel.classList.add("collapse");
+
+            colors[i].addEventListener("click", () => {
+                let panel = colors[i].firstElementChild;
+                panel.classList.remove("collapse");
+            });
+            colors[i].addEventListener("mouseleave", () => {
+                let panel = colors[i].firstElementChild;
+                panel.classList.add("collapse");
+            });
+        }*/
+
+        // for (let i = 0; i < models.length; i++) {
+        //
+        //     let child = document.createElement("div");
+        //     models[i].appendChild(child);
+        //     child.classList.add("btn-model-select");
+        //     child.classList.add("collapse");
+        //     child.innerText = "Sélectionner ce modèle"
+        //     let label = document.createElement("div");
+        //     label.classList.add("label-model");
+        //     label.innerHTML = "PDF | WORD";
+        //     models[i].appendChild(label);
+        //     models[i].addEventListener("mouseover", () => {
+        //         models[i].firstElementChild.classList.remove("collapse");
+        //     });
+        //     models[i].addEventListener("mouseleave", () => {
+        //         models[i].firstElementChild.classList.add("collapse");
+        //     });
+        // }
+        createTemplates(models);
+
+        function onPush(index) {
+            form.year.value = index;
+            form.submit();
+        }
+    </script>
+{% endblock %}
