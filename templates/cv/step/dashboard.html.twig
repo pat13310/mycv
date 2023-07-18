@@ -1,24 +1,108 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 
 {% block title %}{{ name }}{% endblock %}
 
+{% block left %}
+    <div class="logo text-center mt-4">Mon <span class="logo2">CV</span></div>
+{% endblock %}
 
 
-{% block body %}
-    <div class="spacer-5"></div>
-    <h1 class="my-3 text-center">{{ name }}</h1>
-    <hr>
-    <div class="container-fluid row mt-5">
-        <div class="col-4 ">
-            <div class="">
+
+{% block right %}
+
+    <h1 class="text-center bb-1">{{ name }}</h1>
+
+    <div class="container-fluid row gx-1">
+    <div class="col-2 mx-3 ">
+        <div class="mt-4 d-flex flex-wrap justify-content-center">
+            <img class="upload-photo-section" src="{{ asset('build/images/NoImage.jpg') }}" alt="Image de recrutement">
+            <a href="#" class="mt-3 py-1 btn btn-outline-primary r-50"><p class="extra-small">Importer une image</p></a>
+        </div>
+    </div>
+    <div class="col-6 ">
+        <div class="row gx-3">
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="firstname">PRÉNOM</label>
+                <input type="text" class="form-control" placeholder="ex: Jean" id="firstname">
+            </div>
+            <div class="col-6 form-group">
+                <label class="col-form-label mt-1" for="name">NOM</label>
+                <input type="text" class="form-control" placeholder="ex: Dupond" id="name">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="vendor">INTITULÉ DU POSTE</label>
+                <input type="text" class="form-control" placeholder="ex: Vendeur" id="vendor">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="address">ADRESSE</label>
+                <input type="text" class="form-control" placeholder="ex: 5 rue des cigognes" id="address">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="code">CODE POSTAL</label>
+                <input type="text" class="form-control" placeholder="ex: 75000" id="code">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="country">VILLE</label>
+                <input type="text" class="form-control" placeholder="ex: Paris" id="country">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="phone">TÉLÉPHONE</label>
+                <input type="text" class="form-control" placeholder="ex: 06 25 12 66 22 " id="phone">
+            </div>
+            <div class="col-6 form-group ">
+                <label class="col-form-label mt-1" for="email">E-MAIL</label>
+                <input type="text" class="form-control" placeholder="ex: adresse@mail.com" id="email">
+            </div>
+
+            <div class="my-4 col-12"><p class="mb-1"><b>Ajouter des informations supplémentaires</b> (optionnel)</p>
+                <div class="row">
+                    <div class="col-7 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Âge / Date de
+                            naissance
+                        </button>
+                    </div>
+                    <div class="col-10 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Permis de
+                            conduire / Date de naissance
+                        </button>
+                    </div>
+                    <div class="col-4 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Nationalité
+                        </button>
+                    </div>
+                    <div class="col-6 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Situation
+                            familiale
+                        </button>
+                    </div>
+                    <div class="col-4 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Site Web
+                        </button>
+                    </div>
+                    <div class="col-8 my-2">
+                        <button class="btn btn-infos"><i class="fa-solid fa-circle-plus"></i>&nbsp; Disponibilité /
+                            Mobilité
+                        </button>
+                    </div>
+                </div>
 
             </div>
-        </div>
-        <div class="col-8 ">
-            <div class="">
 
-            </div>
         </div>
+
+    </div>
+    <div class="container-fluid w-100 row justify-content-between mx-auto gx-2">
+        <div class="col-6 px-4">
+            <a href="#" class="py-2 px-4 mb-2 btn r-50 btn-outline-primary"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;
+                Retour
+            </a>
+        </div>
+        <div class="col-6 text-end">
+            <a href="#" class="py-2 px-4 mb-2 btn r-50 btn-primary ">
+                Suivant: expérience
+            </a>
+        </div>
+    </div>
 
 {% endblock %}

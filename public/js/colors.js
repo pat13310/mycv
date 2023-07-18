@@ -7,7 +7,7 @@ const codes = [
     ["#929496", "#bdc4cb", "#9fb1c4", "#626d79",],
     ["#944150", "#bd5366", "#e3667d", "#622c35",],
     ["#b9481f", "#d95626", "#ef5c27", "#8c3819",],
-    ["#f89200", "#fda830",  "#ffcc00","#fccf8c",],
+    ["#f89200", "#fda830", "#ffcc00", "#fccf8c",],
     ["#166c60", "#1d8879", "#27b29f", "#104b43",],
     ["#007d8b", "#019daf", "#05bace", "#01474f",],
     ["#102a73", "#1c40a9", "#3d6ef5", "#09173d",],
@@ -107,5 +107,33 @@ function createTemplates(models) {
         models[i].addEventListener("mouseleave", () => {
             models[i].firstElementChild.classList.add("collapse");
         });
+    }
+}
+
+function loadSteps(parent) {
+
+    let steps = [
+        {"name": "Sélectionner votre CV", "points": [{'name': "Vous pouvez à tout moment modifier le modèle"}]},
+        {
+            "name": "Renseigner votre CV", "points": [
+                {'name': "Coordonnées"},
+                {'name': "Expérience"},
+                {'name': "Formation"},
+                {'name': "Profil"},
+                {'name': "Langues"},
+                {'name': "Centre d'intérêt"},
+                {'name': "Autres"},
+            ]
+        },
+    ];
+    for (let i = 0; i < steps.length; i++) {
+        let section = document.createElement('div');
+        section.innerHTML = `${steps[i].name}`;
+        parent.appendChild(section);
+        for (let j = 0; j < steps.points.length; j++) {
+            let point = document.createElement('div');
+            point.innerHTML = `${steps[i].points[j].name}`;
+            section.appendChild(point);
+        }
     }
 }
